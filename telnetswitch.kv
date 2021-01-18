@@ -1,0 +1,329 @@
+# kivy.require('1.11.1')
+
+<MainWidget>:
+    size_hint: None, None
+    BoxLayout:
+        size_hint: None, None
+        size_hint: (1, 1)
+        LeftWidget:
+            id: LeftWidget
+            size_hint: None, None
+            size_hint: (1, 1)
+            BoxLayout:
+                orientation: 'vertical'
+                AddWidgetTelnet:
+                    id: AddWidgetTelnet
+                    size_hint: None, None
+                    size_hint: 1, 0.06
+                    padding: 5, 2, 5, 0
+                    spacing: 2
+                    canvas:
+                        Color:
+                            rgba:  root.color_canvas             #1, 1, 1, 0.8
+                        Rectangle:    
+                            size: self.size
+                            pos: self.pos 
+
+                CLI:
+                    id: CLI
+
+        RightWidget:
+            id: RightWidget
+
+
+<RowLogin>:
+    id: RowLogin
+    size_hint_y: None
+    height:  '40sp'
+    background_normal: ''
+    BoxLayout:
+        padding: 40, 0, 0, 0
+        size_hint: 0.3, 0.9
+        TextInput:
+            id: id_username
+            hint_text: 'username'
+            multiline: False
+            write_tab: False
+            size_hint: None, None
+            size: ('100sp' , '30sp')
+            halign: 'center'
+            valign: 'middle'
+            text_size: '5sp'
+            border: 0,0,0,0
+            color: (0,0,0,1)
+            on_text: root.validate(self, self.text)
+            on_focus: root.focus(self, self.text)
+
+    BoxLayout:
+        size_hint: 0.3, 0.9
+        TextInput:
+            id: id_password
+            hint_text: 'password'
+            password: True
+            multiline: False
+            write_tab: False
+            halign: 'center'
+            valign: 'middle'
+            text_size: '5sp'
+            size_hint: None, None
+            size: ('100sp' , '30sp')
+            border: 0,0,0,0
+            color: (0,0,0,1)
+            on_text: root.validate(self, self.text)
+            on_focus: root.focus(self, self.text)
+
+
+<WorkComands>:
+    id: WorkComands
+    background_normal: ''
+    size_hint_y: None
+    height:  '75sp'
+    padding: 5, 5, 0, 0
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 3
+            size_hint_y: None
+            height:  '30sp'
+            BoxLayout:
+                Button:
+                    text: 'refresh'
+                    background_normal: ''
+                    background_color: root.grey
+                    on_release: root.refresh()
+
+            BoxLayout:
+                Button:
+                    text: 'clear CPI'
+                    background_normal: ''
+                    background_color: root.grey
+                    on_release: root.clear_cpi()
+
+            BoxLayout:
+            BoxLayout:
+
+        BoxLayout:
+            orientation: 'horizontal'
+            padding: 0, 5, 0, 0
+            spacing: 10
+            size_hint_y: None
+            height:  '30sp'
+            Button:
+                text: 'Space'
+                hint_text: ' '
+                size_hint_x: None
+                width: 75
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.commands_telnet_2(self, self.hint_text)
+
+            Button:
+                text: 'Q'
+                hint_text: 'q'
+                size_hint_x: None
+                width: 75
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.commands_telnet_2(self, self.hint_text)
+
+
+<RightWidget>:
+    id: RightWidget
+    size_hint: (0.5, 1)
+    orientation: 'vertical'
+    background_normal: ''
+    canvas:
+        Color:
+            rgba: root.color_canvas
+        Rectangle:    
+            size: self.size
+            pos: self.pos 
+
+    RowLogin:
+
+    WorkComands:
+
+    DeviceType:
+        id: DeviceType
+        size_hint_y: None
+        height:  '90sp'
+        background_normal: ''
+        padding: 5, 10, 5, 0
+        orientation: 'vertical'
+        spacing: 3
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 3
+            Button:
+                text: 'QTech'
+                id: QTech
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.choice_device(self, self.text)
+
+            Button:
+                text: 'SNR'
+                id: SNR
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.choice_device(self, self.text)
+
+            Button:
+                text: 'DLink'
+                id: DLink
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.choice_device(self, self.text)
+
+            Button:
+                text: 'EdgeCore'
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.choice_device(self, self.text)
+
+        BoxLayout:
+            orientation: 'horizontal'
+            spacing: 3
+            Button:
+                text: 'BDCOM'
+                id: BDCOM
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.choice_device(self, self.text)
+
+            Button:
+                text: 'CDATA'
+                id: CDATA
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.choice_device(self, self.text)
+
+            Button:
+                text: ''
+                background_normal: ''
+                background_color: root.grey
+
+            Button:
+                text: ''
+                background_normal: ''
+                background_color: root.grey
+                on_release: root.choice_device(self, self.text)
+
+    CLIDevice:
+        id: CLIDevice
+
+
+<BoxTab>:
+    padding: 0, 0, 0, 0
+    background_normal: ''
+    background_color: 1,1,1,1
+
+
+<BoxCliText>:
+    id: BoxCli
+    BoxLayout:
+        padding: 50, 5, 5, 50
+        size: self.size
+        canvas:
+            Color:
+                rgba: 0, 0, 0, 1  # bordet textinput
+            Rectangle:    
+                size: self.size
+                pos: self.pos
+    
+        TextInput:
+            id: textinput_cli
+            text: ''
+            readonly: True
+            foreground_color: 1,1,1,1
+            background_color: 0,0,0,1
+            border_color: 0,0,0,0
+
+
+<BoxCliLabel>:
+    id: BoxCli
+    ScrollView:
+        bar_width: 8
+        scroll_wheel_distance: 50
+        BoxLayout:
+            cols: 1
+            padding: 45, 10, 5, 50 #dp(30)
+            size_hint_y: None
+            height: self.minimum_height 
+            Label:
+                id: textinput_cli
+                markup: True
+                text: ''
+                size_hint_y: None
+                valign: 'top'
+                height: self.texture_size[1] 
+                text_size: self.width - dp(20), None
+                color: 1,1,1,1
+                mipmap: True 
+
+
+<BoxCliTextInput>:
+    BoxLayout:
+        padding: 5, 10, 5, 5 #dp(30)
+        TerminalConsole:
+            id: text_input
+            padding: 100, 10, 5, 5
+            multiline: False
+            readonly: True
+            write_tab: True
+            key_bindings: 'emacs'
+            keyboard_on_key_down: self.keyboard_on_key_down
+
+
+<ShowBubble>:
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: None, None
+        size_hint: 1, 1
+        canvas:
+            Color:
+                rgba: root.color_canvas #[0.6, 0.6, 0.53, 1]
+            Rectangle:    
+                size: self.size
+                pos: self.pos
+
+        BoxLayout:
+            padding: 10, 20, 10, 5
+            AnchorLayout:
+                anchor_x: 'center'
+                TextInput:
+                    id: ip_text
+                    text: ''
+                    write_tab: False
+                    foreground_color: (0, 0, 0, 1)#(0, 0, 0, 1) root.color_text
+                    size_hint_x: None
+                    width: 200
+                    halign: 'center'
+                    valign: 'middle'
+                    multiline: False
+                    on_text: root.validate(self, self.text)
+
+        BoxLayout:
+            padding: 10, 10, 10, 10
+            AnchorLayout:
+                anchor_x: 'right'
+                Button:
+                    id: ip_btn
+                    text: 'connect'
+                    size_hint_x: None
+                    halign: 'right'
+                    valign: 'middle'
+                    on_release: 
+
+
+<ErorrPopup>:
+    BoxLayout:
+        Label:
+            id: label_erorr
+            size_hint_y: None
+            height: '30sp'
+            size_hint_x: None
+            size_hint_x: 30
+            halign: 'center'
+            valign: 'middle'
